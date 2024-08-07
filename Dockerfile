@@ -19,8 +19,8 @@ RUN npm run build
 # Instalar `serve` para servir la aplicación
 RUN npm install -g serve
 
-# Exponer el puerto 3000
-EXPOSE 3000
+# Exponer el puerto 8080
+EXPOSE 8080
 
 # Comando por defecto para ejecutar la aplicación
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "build", "-l", "8080"]
