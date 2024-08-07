@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'aos/dist/aos.css';
@@ -20,51 +20,77 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import videoPoster from '../assets/imagenes_videos/video_poster.PNG';
 import bannerImg from '../assets/imagenes_videos/BannerIsma.png';
 
-const ModalPopup = ({ handleVideoStart }) => (
-  <div className="modal fade show text-center rounded-5 bg-transparent" id="exampleModal" tabIndex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div className="modal-dialog modal-dialog-centered" role="document">
-      <div className="modal-content">
-        <div className="modal-header" style={{ border: 'none' }}>
-          <h4 className="modal-title" style={{ fontFamily: 'MarvinVisions' }}>Primera edición del diario que revolucionará la forma en la entrenas</h4>
-          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" onClick={handleVideoStart} style={{ color: 'white' }}>&times;</span>
+const ModalPopup = ({ show, handleClose }) => (
+  <div className={`modal ${show ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: show ? 'block' : 'none', backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
+    <div className="modal-dialog modal-fullscreen" role="document">
+      <div className="modal-content" style={{ backgroundColor: 'black', color: 'white' }}>
+        <div className="modal-header" style={{ borderBottom: 'none', justifyContent: 'center' }}>
+          <h4 className="modal-title text-center" style={{ fontFamily: 'MarvinVisions', color: '#5296FF' }}>Primera edición del diario que revolucionará la forma en la entrenas</h4>
+          <button type="button" className="close" onClick={handleClose} aria-label="Close" style={{ position: 'absolute', right: '10px', color: 'white' }}>
+            <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div className="modal-body">
+        <div className="modal-body text-center">
           <img src={diarioGif} alt="diario" className="diarioBienvenida" />
-          <h6 className="mt-2">No es solo lo que ves, sino lo que se encuentra en su interior</h6>
-          <h6>Encuéntralo en mi asesoría semestral o resérvalo ya!</h6>
+          <h6 className="mt-2" style={{ fontFamily: 'MarvinVisions', color: '#5296FF' }}>No es solo lo que ves, sino lo que se encuentra en su interior</h6>
+          <h6 style={{ fontFamily: 'MarvinVisions', color: '#5296FF' }}>Encuéntralo en mi asesoría semestral o resérvalo ya!</h6>
         </div>
       </div>
     </div>
   </div>
 );
 
-const Navbar = () => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-light" style={{ maxWidth: '100vw' }}>
-    <div className="container">
-      <Link className="navbar-brand flex-grow-1" to="/">
-        <img src={logo} alt="Transforma tu Vida Fitness" width="100" height="50" />
-      </Link>
-      <button className="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
-        style={{ fontSize: '0.8rem' }}>
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
-            <a className="nav-link btn btn-success text-light" href="https://chat.whatsapp.com/IZ1QwzSyZFX0fdMkcVNwEd">Acceso a la comunidad</a>
-          </li>
-        </ul>
+const Navbar = () => {
+  const handleNavLinkClick = (e, targetId) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+      document.querySelector('.navbar-toggler').click(); // Cierra el menú después de hacer clic en un enlace
+    }
+  };
+
+  return (
+    <nav className="navbar navbar-expand-lg navbar-dark bg-light" style={{ maxWidth: '100vw' }}>
+      <div className="container">
+        <Link className="navbar-brand flex-grow-1" to="/">
+          <img src={logo} alt="Transforma tu Vida Fitness" width="100" height="50" />
+        </Link>
+        <button className="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+          style={{ fontSize: '0.8rem' }}>
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <a className="nav-link" href="#header" onClick={(e) => handleNavLinkClick(e, 'header')}>Inicio</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#information" onClick={(e) => handleNavLinkClick(e, 'information')}>Información</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#benefits" onClick={(e) => handleNavLinkClick(e, 'benefits')}>Beneficios</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#assessments" onClick={(e) => handleNavLinkClick(e, 'assessments')}>Asesorías</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#faq" onClick={(e) => handleNavLinkClick(e, 'faq')}>FAQ</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link btn btn-success text-light" href="https://chat.whatsapp.com/IZ1QwzSyZFX0fdMkcVNwEd">Acceso a la comunidad</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-);
+    </nav>
+  );
+};
+
 
 const HeaderSection = () => (
-  <header className="text-center" data-aos="flip-right">
+  <header id="headerSection" className="text-center" data-aos="flip-right">
     <div className="container">
       <h1 className="frase-motivadora mb-5">Transforma tu vida hoy, únete al 10% que alcanza sus metas fitness</h1>
       <h2 className="frase-motivadora mb-5">Tenemos más de 35.000 decisiones diarias</h2>
@@ -73,32 +99,53 @@ const HeaderSection = () => (
   </header>
 );
 
-const VideoSection = ({ videoStarted, handleVideoStart }) => (
-  <div className="container">
-    <div className="row justify-content-center">
-      <div className="col-md-8">
-        <div className="d-flex justify-content-center align-items-center" style={{ height: '60vh', position: 'relative' }}>
-          {!videoStarted ? (
-            <>
-              <img src={videoPoster} alt="Vista previa del video" className="mw-100 mh-100" style={{ objectFit: 'cover' }} />
-              <button onClick={handleVideoStart} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '10px 20px', backgroundColor: '#000', color: '#fff', border: 'none', cursor: 'pointer' }}>
-                Reproducir Video
-              </button>
-            </>
-          ) : (
-            <video id="miVideo" className="mw-100 mh-100" controls autoPlay poster={videoPoster}>
-              <source src={videoSrc} type="video/mp4" />
-              Tu navegador no soporta la reproducción de video.
-            </video>
-          )}
+const VideoSection = ({ videoStarted, handleVideoStart }) => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!videoRef.current) return;
+      const rect = videoRef.current.getBoundingClientRect();
+      const inView = rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+      if (inView && videoRef.current.paused) {
+        videoRef.current.play();
+      } else if (!inView && !videoRef.current.paused) {
+        videoRef.current.pause();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-8">
+          <div className="d-flex justify-content-center align-items-center" style={{ height: '60vh', position: 'relative' }}>
+            {!videoStarted ? (
+              <>
+                <img src={videoPoster} alt="Vista previa del video" className="mw-100 mh-100" style={{ objectFit: 'cover' }} />
+                <button onClick={handleVideoStart} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', padding: '10px 20px', backgroundColor: '#000', color: '#fff', border: 'none', cursor: 'pointer' }}>
+                  Reproducir Video
+                </button>
+              </>
+            ) : (
+              <video ref={videoRef} id="miVideo" className="mw-100 mh-100" controls autoPlay poster={videoPoster}>
+                <source src={videoSrc} type="video/mp4" />
+                Tu navegador no soporta la reproducción de video.
+              </video>
+            )}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const InformationSection = () => (
-  <section className="py-3" data-aos="zoom-in">
+  <section id="informationSection" className="py-3" data-aos="zoom-in">
     <div className="container">
       <div className="row">
         <div className="col-12 text-justify" data-aos="fade-right" data-aos-duration="2000">
@@ -161,7 +208,7 @@ const GiftSection = () => {
 };
 
 const BenefitsSection = () => (
-  <section id="beneficios" className="py-3 mt-5">
+  <section id="benefitsSection" className="py-3 mt-5">
     <div className="container">
       <h2 className="titulos-fondo text-center mb-5 text-uppercase text-light bg-primary" style={{ fontWeight: 'bold' }} data-aos="zoom-in">
         Beneficios de Entrenar con un Coach
@@ -183,7 +230,7 @@ const BenefitsSection = () => (
 );
 
 const AssessmentsSection = () => (
-  <section id="beneficios" className="py-5">
+  <section id="assessmentsSection" className="py-5">
     <div className="container">
       <h2 className="text-center mb-3 text-uppercase text-light bg-primary" style={{ fontWeight: 'bold' }} data-aos="zoom-in">
         Asesorías Únicas
@@ -218,7 +265,7 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="py-5" data-aos="fade-right" data-aos-duration="1000">
+    <section id="faqSection" className="py-5" data-aos="fade-right" data-aos-duration="1000">
       <div className="container">
         <h2 className="text-center mb-5 text-uppercase" style={{ color: '#c5c5c5', fontWeight: 'bold' }}>Preguntas Frecuentes</h2>
         <div className="accordion" id="accordionExample">
@@ -235,6 +282,7 @@ const FAQSection = () => {
                     className="btn btn-link btn-block text-left btn-custom"
                     aria-expanded={activeIndex === index}
                     aria-controls={`collapse${index}`}
+                    style={{ textDecoration: 'none' }}
                   >
                     <span className="btn-text">{item.question}</span>
                     <span className="float-right">
@@ -297,6 +345,7 @@ const Footer = () => (
 
 const PaginaPrincipal = () => {
   const [videoStarted, setVideoStarted] = useState(false);
+  const [showModal, setShowModal] = useState(true);  // Modal se muestra por defecto
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -306,10 +355,18 @@ const PaginaPrincipal = () => {
       }
       const rect = el.getBoundingClientRect();
       const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-      return rect.top <= windowHeight / 2 && rect.bottom >= windowHeight / 2;
+      return rect.top <= windowHeight && rect.bottom >= 0;
     }
 
     const handleScroll = () => {
+      const video = document.getElementById('miVideo');
+      if (video) {
+        if (isElementInViewport(video)) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
       document.querySelectorAll('.benefits').forEach((benefit) => {
         if (isElementInViewport(benefit)) {
           benefit.style.backgroundColor = 'hsla(217, 89%, 51%, 0.5)';
@@ -349,9 +406,13 @@ const PaginaPrincipal = () => {
     setVideoStarted(true);
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div>
-      <ModalPopup handleVideoStart={handleVideoStart} />
+      <ModalPopup show={showModal} handleClose={handleCloseModal} />
       <Navbar />
       <HeaderSection />
       <VideoSection videoStarted={videoStarted} handleVideoStart={handleVideoStart} />
@@ -368,4 +429,3 @@ const PaginaPrincipal = () => {
 };
 
 export default PaginaPrincipal;
-
