@@ -132,25 +132,33 @@ const ImageCarousel = () => (
   </Carousel>
 );
 
-const GiftSection = ({ irAPaginaContacto }) => (
-  <div className="container">
-    <div className="row text-center pointer" data-aos="fade-up">
-      <div className="col-12">
-        <button onClick={irAPaginaContacto}>
-          <p className="titulos-fondo mb-0 p-1 text-uppercase bg-primary text-light mx-5 rounded" style={{ fontSize: '1.2rem' }}>
-            Recibe tu regalo gratuito
-          </p>
-          <img
-            src={regaloImg}
-            alt="Regalo Gratis"
-            className="jump img-fluid mx-auto d-block"
-            style={{ maxWidth: '50%' }}
-          />
-        </button>
+const GiftSection = () => {
+  const navigate = useNavigate();
+
+  const irAPaginaContacto = () => {
+    navigate('/regalo');
+  };
+
+  return (
+    <div className="container">
+      <div className="row text-center pointer" data-aos="fade-up">
+        <div className="col-12">
+          <div onClick={irAPaginaContacto} style={{ cursor: 'pointer' }}>
+            <p className="titulos-fondo mb-0 p-1 text-uppercase bg-primary text-light mx-5 rounded" style={{ fontSize: '1.2rem' }}>
+              Recibe tu regalo gratuito
+            </p>
+            <img
+              src={regaloImg}
+              alt="Regalo Gratis"
+              className="jump img-fluid mx-auto d-block"
+              style={{ maxWidth: '50%' }}
+            />
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const BenefitsSection = () => (
   <section id="beneficios" className="py-3 mt-5">

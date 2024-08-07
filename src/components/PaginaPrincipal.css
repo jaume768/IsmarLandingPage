@@ -1,138 +1,134 @@
 @keyframes jump {
-    0% {
-      transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
-    }
-  
-    40% {
-      transform: translate3d(0, 15%, 0) scale3d(0.8, 1.2, 1);
-    }
-  
-    100% {
-      transform: translate3d(0, 50%, 0) scale3d(1.2, 0.8, 1);
-    }
+  0% {
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
   }
-  
-  .jump {
-    transform-origin: 50% 50%;
-    animation: jump .5s linear alternate infinite;
+  40% {
+    transform: translate3d(0, 15%, 0) scale3d(0.8, 1.2, 1);
   }
-  
-  body {
-    background-color: #000000;
-    color: white;
+  100% {
+    transform: translate3d(0, 50%, 0) scale3d(1.2, 0.8, 1);
   }
-  
-  .frase-motivadora {
-    font-family: MarvinVisions;
-    color: #5296FF;
-  }
-  
-  .body-text,
-  span {
-    font-size: 1rem;
-    color: #000000;
-  }
-  
-  .btn-custom {
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-  
-  .preguntas {
-    background-color: #c5c5c5;
-  }
-  
-  .navbar {
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-  }
-  
-  header {
-    padding-top: 10rem;
-  }
-  
-  .imgCarrousel {
-    width: 80% !important;
-  }
-  
-  .titulos-fondo {
-    font-family: MarvinVisions;
-  }
-  
-  .contenedor-agenda-llamada {
-    background-size: cover;
-    background-image: url("../assets/imagenes_videos/BannerIsma.png");
-  }
-  
-  .play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .play-button::after {
-    content: "\f04b";
-    /* Código del icono de play (FontAwesome) */
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 36px;
-    color: rgba(0, 0, 0, 0.8);
-  }
-  
-  .card-text {
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  
-  @media (max-width: 360px) {
-    .card-text {
-      font-size: 0.75rem;
-    }
-  }
-  
-  .benefitsCard {
-    background-color: #000000;
-  }
-  
-  .modal-content {
-    background-color: #090907 !important;
-    color: #5296FF;
-  }
-  
-  .diarioBienvenida {
-    max-width: 50%;
-    max-height: 50%;
-  }
-  
-  @font-face {
-    font-family: 'MarvinVisions';
-    src: url('../assets/tipografias/MarvinVisions-Bold.woff2') format('woff2');
-  }
-  
-  @font-face {
-    font-family: 'AcuminPro';
-    src: url('../assets/tipografias/Acumin-RPro.otf');
-  }
+}
 
-  .carousel-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.jump {
+  transform-origin: 50% 50%;
+  animation: jump .5s linear alternate infinite;
+}
+
+body {
+  background-color: #000000;
+  color: white;
+}
+
+.frase-motivadora {
+  font-family: MarvinVisions;
+  color: #5296FF;
+}
+
+.body-text,
+span {
+  font-size: 1rem;
+  color: #000000;
+}
+
+.btn-custom {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.preguntas {
+  background-color: #c5c5c5;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+header {
+  padding-top: 10rem;
+}
+
+.imgCarrousel {
+  width: 80% !important;
+}
+
+.titulos-fondo {
+  font-family: MarvinVisions;
+}
+
+.contenedor-agenda-llamada {
+  background-size: cover;
+  background-image: url("../assets/imagenes_videos/BannerIsma.png");
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play-button::after {
+  content: "\f04b";
+  /* Código del icono de play (FontAwesome) */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 36px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.card-text {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+@media (max-width: 360px) {
+  .card-text {
+    font-size: 0.75rem;
   }
-  
-  .carousel-image {
-    max-width: 50%;
-    height: auto;
-  }
-  
-  
+}
+
+.benefitsCard {
+  background-color: #000000;
+}
+
+.modal-content {
+  background-color: #090907 !important;
+  color: #5296FF;
+}
+
+.diarioBienvenida {
+  max-width: 50%;
+  max-height: 50%;
+}
+
+@font-face {
+  font-family: 'MarvinVisions';
+  src: url('../assets/tipografias/MarvinVisions-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'AcuminPro';
+  src: url('../assets/tipografias/Acumin-RPro.otf');
+}
+
+.carousel-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-image {
+  max-width: 50%;
+  height: auto;
+}
